@@ -1,6 +1,7 @@
 # Notes API Example
 
 This project contains a simple notes and tags API built with FastAPI and a minimal frontend.
+See `TODO.md` for the project roadmap.
 
 ## Backend
 
