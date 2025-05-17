@@ -1,7 +1,20 @@
 # Notes API Example
 
-This project contains a simple notes and tags API built with FastAPI and a minimal frontend.
-See `TODO.md` for the project roadmap.
+This project aims to provide a lightweight note taking service with quick capture
+and linking of ideas. A small roadmap is maintained in `TODO.md`.
+
+## Goals and Key Features
+
+- **Quick capture** of ideas with minimal friction
+- **Linking** notes together using tags
+- Future **visualization** of note relationships
+- Eventual **synchronization** across devices
+
+## Tech Stack
+
+The project uses **FastAPI** for the backend with a simple SQLite database. A
+minimal HTML/JavaScript frontend is provided in `frontend/`. The structure keeps
+frontend and backend code in separate directories.
 
 ## Backend
 
@@ -32,3 +45,9 @@ Run tests with `pytest` after installing the requirements:
 pip install -r backend/requirements.txt
 pytest
 ```
+
+## Contributing
+
+1. Fork the repository and create your branch from `work`.
+2. Ensure any tests pass with `pytest`.
+3. Submit a pull request describing your changes.
