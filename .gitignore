@@ -21,3 +21,10 @@ coverage/
 # Other
 .DS_Store
 
+# Python artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+notes.db
+.venv/
+
