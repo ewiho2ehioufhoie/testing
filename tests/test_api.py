@@ -21,20 +21,28 @@ def client(tmp_path_factory):
 
 
 def test_create_tag_and_note(client):
+    # register and login
+    res = client.post('/users/register', json={'username': 'user', 'password': 'pass'})
+    assert res.status_code == 200
+    res = client.post('/users/login', json={'username': 'user', 'password': 'pass'})
+    assert res.status_code == 200
+    token = res.json()['token']
+    headers = {'Authorization': f'Bearer {token}'}
+
     # create tag
-    res = client.post('/tags/', json={'name': 'work'})
+    res = client.post('/tags/', json={'name': 'work'}, headers=headers)
     assert res.status_code == 200
     tag = res.json()
 
     # create note with that tag
-    res = client.post('/notes/', json={'title': 'Title', 'content': 'Body', 'tag_ids': [tag['id']]})
+    res = client.post('/notes/', json={'title': 'Title', 'content': 'Body', 'tag_ids': [tag['id']]}, headers=headers)
     assert res.status_code == 200
     note = res.json()
     assert note['title'] == 'Title'
     assert len(note['tags']) == 1
 
     # list notes
-    res = client.get('/notes/')
+    res = client.get('/notes/', headers=headers)
     assert res.status_code == 200
     notes = res.json()
     assert len(notes) == 1
