@@ -16,13 +16,14 @@ uvicorn backend.main:app --reload
 
 ## Frontend
 
-The `frontend/` directory holds a very small HTML page that interacts with the API using JavaScript `fetch` calls. Open `frontend/index.html` in your browser after starting the backend server.
+The `frontend/` directory contains a basic React app (`src/` directory). Build it with Node and serve the static files from any web server. The older `frontend/index.html` remains for reference.
 
 ## Functionality
 
 - CRUD operations for notes and tags via REST endpoints
 - Notes can be associated with multiple tags
 - Data is stored in a SQLite database (`notes.db`)
+- Users must register and log in; pass the returned token in the `Authorization` header.
 
 ## Testing
 

@@ -20,21 +20,42 @@ def client(tmp_path_factory):
         os.remove(db_path)
 
 
-def test_create_tag_and_note(client):
+def test_auth_and_crud(client):
+    # register user
+    res = client.post('/users/register', json={'username': 'alice', 'password': 'pw'})
+    assert res.status_code == 200
+
+    # login
+    res = client.post('/users/login', json={'username': 'alice', 'password': 'pw'})
+    assert res.status_code == 200
+    token = res.json()['token']
+    headers = {'Authorization': f'Bearer {token}'}
+
     # create tag
-    res = client.post('/tags/', json={'name': 'work'})
+    res = client.post('/tags/', headers=headers, json={'name': 'work'})
     assert res.status_code == 200
     tag = res.json()
 
-    # create note with that tag
-    res = client.post('/notes/', json={'title': 'Title', 'content': 'Body', 'tag_ids': [tag['id']]})
+    # create note with link and tag
+    res = client.post('/notes/', headers=headers,
+                     json={'title': 'Title', 'content': 'Body [[1]]', 'tag_ids': [tag['id']]})
     assert res.status_code == 200
     note = res.json()
     assert note['title'] == 'Title'
     assert len(note['tags']) == 1
+    assert note['links'] == [1]
 
-    # list notes
-    res = client.get('/notes/')
+    # search
+    res = client.get('/search/', headers=headers, params={'q': 'Body'})
     assert res.status_code == 200
-    notes = res.json()
-    assert len(notes) == 1
+    assert len(res.json()) == 1
+
+    # upload attachment
+    file_content = b'hello world'
+    res = client.post('/attachments/upload', headers=headers,
+                      files={'file': ('hello.txt', file_content)})
+    assert res.status_code == 200
+    fname = res.json()['filename']
+    res = client.get(f'/attachments/{fname}', headers=headers)
+    assert res.status_code == 200
+    assert res.content == file_content
