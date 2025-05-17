@@ -22,3 +22,12 @@ The `frontend/` directory holds a very small HTML page that interacts with the A
 - CRUD operations for notes and tags via REST endpoints
 - Notes can be associated with multiple tags
 - Data is stored in a SQLite database (`notes.db`)
+
+## Testing
+
+Run tests with `pytest` after installing the requirements:
+
+```bash
+pip install -r backend/requirements.txt
+pytest
+```
