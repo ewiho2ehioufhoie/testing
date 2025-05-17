@@ -6,6 +6,7 @@ See `TODO.md` for the project roadmap.
 ## Backend
 
 The backend resides in `backend/` and uses FastAPI with an SQLite database.
+User accounts are supported via `/users/register` and `/users/login`. Provide the returned token in an `Authorization` header (`Bearer <token>`) when creating, listing, or editing notes.
 
 To run the API server:
 
