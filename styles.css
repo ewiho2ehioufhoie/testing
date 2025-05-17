@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.note {
+    border: 1px solid #ccc;
+    padding: .5rem;
+    margin-bottom: .5rem;
+}
+
+.note-actions button {
+    margin-right: .5rem;
+}
+
+#searchInput {
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
